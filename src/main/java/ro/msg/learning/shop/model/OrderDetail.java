@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
-class OrderDetail {
+public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

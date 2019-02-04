@@ -2,9 +2,9 @@ package ro.msg.learning.shop.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ro.msg.learning.shop.model.Customer;
+import ro.msg.learning.shop.model.Supplier;
 
 @Repository
-public interface SupplierRepository extends CrudRepository<Customer, Integer> {
+public interface SupplierRepository extends CrudRepository<Supplier, Integer> {
 
 }

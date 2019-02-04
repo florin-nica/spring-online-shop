@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Data
 @Entity
-class Location {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

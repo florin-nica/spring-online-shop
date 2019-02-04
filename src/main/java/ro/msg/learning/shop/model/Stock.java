@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
-class Stock {
+public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

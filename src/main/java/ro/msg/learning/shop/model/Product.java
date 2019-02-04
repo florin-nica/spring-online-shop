@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @Entity
-class Product {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
