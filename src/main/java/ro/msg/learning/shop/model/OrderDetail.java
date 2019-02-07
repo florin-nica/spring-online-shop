@@ -1,5 +1,6 @@
 package ro.msg.learning.shop.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
+@Builder
 public class OrderDetail {
 
     @Id

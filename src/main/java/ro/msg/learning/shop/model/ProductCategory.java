@@ -1,5 +1,6 @@
 package ro.msg.learning.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ public class ProductCategory {
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @JsonIgnore
     private List<Product> products;
 
     private String name;

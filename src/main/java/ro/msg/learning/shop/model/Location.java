@@ -1,6 +1,7 @@
 package ro.msg.learning.shop.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude="orders")
 public class Location {
 
     @Id
