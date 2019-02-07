@@ -17,17 +17,16 @@ public class CsvConverter {
 
     public <T> List<T> fromCsv(Class<T> clazz, InputStream inputStream) throws IOException {
         CsvSchema schema = mapper.schemaFor(clazz).withHeader();
-
-        MappingIterator<T> it = mapper.readerFor(clazz).with(schema)
-                .readValues(inputStream);
-
-        return it.readAll();
+        MappingIterator<T> it = mapper.readerFor(clazz).with(schema).readValues(inputStream);
+        List<T> list = it.readAll();
+        inputStream.close();
+        return list;
     }
 
     public <T> void toCsv(Class<T> clazz, List<T> pojos, OutputStream outputStream) throws IOException {
         CsvSchema schema = mapper.schemaFor(clazz).withHeader();
-
         mapper.writer(schema).writeValue(outputStream, pojos);
+        outputStream.close();
     }
 
 }
