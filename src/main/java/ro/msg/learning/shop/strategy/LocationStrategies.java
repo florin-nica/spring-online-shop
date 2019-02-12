@@ -1,5 +1,5 @@
 package ro.msg.learning.shop.strategy;
 
 public enum LocationStrategies {
-    SINGLE_LOCATION
+    SINGLE_LOCATION, CLOSEST_LOCATION
 }

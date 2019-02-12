@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ro.msg.learning.shop.repository.LocationRepository;
 import ro.msg.learning.shop.repository.ProductRepository;
+import ro.msg.learning.shop.strategy.ClosestLocationStrategy;
 import ro.msg.learning.shop.strategy.LocationStrategies;
 import ro.msg.learning.shop.strategy.LocationStrategy;
 import ro.msg.learning.shop.strategy.SingleLocationStrategy;
@@ -22,9 +23,13 @@ public class LocationStrategyConfiguration {
 
     @Bean
     public LocationStrategy singleLocationStrategy() {
-        if (strategy == LocationStrategies.SINGLE_LOCATION) {
-            return new SingleLocationStrategy(locationRepository, productRepository);
+        switch (strategy) {
+            case SINGLE_LOCATION:
+                return new SingleLocationStrategy(locationRepository, productRepository);
+            case CLOSEST_LOCATION:
+                return new ClosestLocationStrategy(locationRepository, productRepository);
+            default:
+                return new SingleLocationStrategy(locationRepository, productRepository);
         }
-        return new SingleLocationStrategy(locationRepository, productRepository);
     }
 }

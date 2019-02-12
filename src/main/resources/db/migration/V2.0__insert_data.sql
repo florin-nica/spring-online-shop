@@ -11,18 +11,16 @@ VALUES (1, 'Rebekah', 'Barry', 'Vivamus.rhoncus.Donec@convallis.net'),
        (10, 'Shana', 'Harvey', 'varius.ultrices@et.edu');
 
 INSERT INTO LOCATION (id, city, country, county, name, street)
-VALUES (1, 'Husum', 'Belarus', 'Saarland', 'Et Rutrum Non LLC', '769-9215 Pharetra Avenue'),
-       (2, 'Vienna', 'Oman', 'Vienna', 'Nullam LLP', 'Ap #166-2784 Cubilia Av.'),
-       (3, 'Bauchi', 'China', 'BA', 'Dui Cum Corporation', '318-4194 Egestas Avenue'),
-       (4, 'Cork', 'Niue', 'Munster', 'Lorem LLC', '9220 Odio Rd.'),
-       (5, 'Kurnool', 'Qatar', 'Andhra Pradesh', 'Auctor Limited', 'Ap #959-264 Risus. Avenue'),
-       (6, 'Boo', 'Colombia', 'AB', 'Eget Dictum Placerat Consulting', '435-8479 Ultricies Road'),
-       (7, 'Kano', 'Cape Verde', 'KN', 'Libero LLP', '738-6131 Justo. St.'),
-       (8, 'Lo Prado', 'Mali', 'Metropolitana de Santiago', 'Diam Lorem Auctor Consulting',
-        'P.O. Box 580, 9114 Erat Street'),
-       (9, 'Bareilly', 'Jamaica', 'Uttar Pradesh', 'Gravida Aliquam Tincidunt LLC',
-        'P.O. Box 169, 4801 Augue Avenue'),
-       (10, 'Fairbanks', 'Saint Kitts and Nevis', 'AK', 'Aliquet Corp.', '231-3828 Risus. Ave');
+VALUES (1, 'Berlin', 'Germany', 'Berlin', 'Et Rutrum Non LLC', 'Andreasstraße'),
+       (2, 'Vienna', 'Austria', 'Vienna', 'Nullam LLP', 'Mariahilfer Straße'),
+       (3, 'Barcelona', 'Spain', 'Catalonia', 'Dui Cum Corporation', 'Avinguda Diagonal'),
+       (4, 'Paris', 'France', 'Paris', 'Lorem LLC', 'Rue Jacob'),
+       (5, 'Rome', 'Italy', 'Lazio', 'Auctor Limited', 'Via della Vite'),
+       (6, 'Prague', 'Czechia', 'Praha', 'Eget Dictum Placerat Consulting', 'Korrunni'),
+       (7, 'Passau', 'Germany', 'KN', 'Libero LLP', 'Dr.-Hans-Kapfinger-Straße'),
+       (8, 'Cluj-Napoca', 'Romania', 'Cluj', 'MSG', 'Samuel Brassai 8'),
+       (9, 'Timisoara', 'Romania', 'Timis', 'Openville', 'Aradului 1'),
+       (10, 'Bucuresti', 'Romania', 'Ilfov', 'Emag', 'Liviu Rebreanu 6A');
 
 INSERT INTO PRODUCT_CATEGORY (id, description, name)
 VALUES (1, 'porttitor eros nec tellus. Nunc', 'Notebook'),
