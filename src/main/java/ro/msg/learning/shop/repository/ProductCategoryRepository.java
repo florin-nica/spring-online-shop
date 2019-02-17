@@ -37,7 +37,7 @@ public class ProductCategoryRepository {
         return jdbcTemplate.queryForObject(query, new Object[]{id}, new ProductCategoryRowMapper());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public ProductCategory insert(final ProductCategory productCategory) {
         String query = "insert into product(name,description) values(?,?)";
 
@@ -54,13 +54,13 @@ public class ProductCategoryRepository {
         return productCategory;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public int deleteById(int id) {
         String query = "delete from product_category where ID =?";
         return jdbcTemplate.update(query, id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public int update(ProductCategory productCategory) {
         String query = "update product_category " +
                 " set name = ?, description = ?" +
