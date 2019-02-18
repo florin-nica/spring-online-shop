@@ -19,11 +19,11 @@ public class BaseLocationStrategy {
     private final LocationRepository locationRepository;
     private final ProductRepository productRepository;
 
-    Map<Integer, Integer> productIdQuantityMap;
-    List<Location> locationsWithAllProducts;
-    List<Product> orderedProducts;
+    protected Map<Integer, Integer> productIdQuantityMap;
+    protected List<Location> locationsWithAllProducts;
+    protected List<Product> orderedProducts;
 
-    void setLocationsWithAllProductsAndOrderedProducts(OrderDtoIn orderDtoIn) {
+    protected void setLocationsWithAllProductsAndOrderedProducts(OrderDtoIn orderDtoIn) {
         orderedProducts = new ArrayList<>();
 
         productIdQuantityMap =
