@@ -7,4 +7,5 @@ import ro.msg.learning.shop.model.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
+    Customer findByUserUsername(String username);
 }

@@ -1,6 +1,5 @@
 package ro.msg.learning.shop.strategy;
 
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import one.util.streamex.EntryStream;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -17,42 +16,26 @@ import ro.msg.learning.shop.exception.StockNotFoundException;
 import ro.msg.learning.shop.model.Location;
 import ro.msg.learning.shop.model.LocationDistance;
 import ro.msg.learning.shop.model.LocationProductQuantity;
-import ro.msg.learning.shop.model.Product;
 import ro.msg.learning.shop.repository.LocationRepository;
 import ro.msg.learning.shop.repository.ProductRepository;
 
 import javax.net.ssl.SSLContext;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
-public class ClosestLocationStrategy implements LocationStrategy {
+public class ClosestLocationStrategy extends BaseLocationStrategy implements LocationStrategy {
 
     private static final String API_KEY = "AIzaSyBPtBPSLKNAwOfu3zq48XaIVyLlscgdz5M";
-    private final LocationRepository locationRepository;
-    private final ProductRepository productRepository;
+
+    public ClosestLocationStrategy(LocationRepository locationRepository, ProductRepository productRepository) {
+        super(locationRepository, productRepository);
+    }
 
     @Override
     public List<LocationProductQuantity> getLocationProductQuantity(OrderDtoIn orderDtoIn) {
 
-        Map<Integer, Integer> productIdQuantityMap = new HashMap<>();
-        List<Product> orderedProducts = new ArrayList<>();
-        List<Location> locationsWithAllProducts = null;
-
-        orderDtoIn.getOrderDetails().forEach(orderDetailDto ->
-                productIdQuantityMap.put(orderDetailDto.getProductId(), orderDetailDto.getQuantity())
-        );
-
-        List<Integer> locationIds = locationRepository.findLocationsWithAllProductsInStock(productIdQuantityMap);
-
-        if (!locationIds.isEmpty()) {
-            locationsWithAllProducts = locationRepository.findAllById(locationIds);
-            orderedProducts.addAll(productRepository.findProductsByIds(productIdQuantityMap.keySet()));
-        }
+        setLocationsWithAllProductsAndOrderedProducts(orderDtoIn);
 
         if (locationsWithAllProducts != null && !locationsWithAllProducts.isEmpty()) {
             AddressDto address = orderDtoIn.getAddress();
@@ -74,7 +57,7 @@ public class ClosestLocationStrategy implements LocationStrategy {
 
         final String originsString =
                 origins.stream()
-                        .map(location -> location.getStreet() + location.getCity() + location.getCountry())
+                        .map(location -> location.getAddress().getStreet() + location.getAddress().getCity() + location.getAddress().getCountry())
                         .collect(Collectors.joining("|"));
 
         final String uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" +

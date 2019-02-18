@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import ro.msg.learning.shop.repository.LocationRepository;
 import ro.msg.learning.shop.repository.ProductRepository;
 import ro.msg.learning.shop.strategy.ClosestLocationStrategy;
-import ro.msg.learning.shop.strategy.LocationStrategies;
 import ro.msg.learning.shop.strategy.LocationStrategy;
+import ro.msg.learning.shop.strategy.LocationStrategyType;
 import ro.msg.learning.shop.strategy.SingleLocationStrategy;
 
 @Configuration
@@ -16,7 +16,7 @@ import ro.msg.learning.shop.strategy.SingleLocationStrategy;
 public class LocationStrategyConfiguration {
 
     @Value("${ro.msg.shop.location-strategy}")
-    private LocationStrategies strategy;
+    private LocationStrategyType strategy;
 
     private final LocationRepository locationRepository;
     private final ProductRepository productRepository;

@@ -3,6 +3,7 @@ package ro.msg.learning.shop.model;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,8 +40,7 @@ public class Order {
     private List<OrderDetail> orderDetails;
 
     private LocalDateTime dateTime;
-    private String country;
-    private String city;
-    private String county;
-    private String street;
+
+    @Embedded
+    private Address address;
 }

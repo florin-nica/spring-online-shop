@@ -3,6 +3,7 @@ package ro.msg.learning.shop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.msg.learning.shop.model.Revenue;
 import ro.msg.learning.shop.repository.OrderDetailRepository;
 import ro.msg.learning.shop.repository.RevenueRepository;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RevenueService {
 
     private final RevenueRepository revenueRepository;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ro.msg.learning.shop.dto.StockDto;
-import ro.msg.learning.shop.model.Stock;
+import ro.msg.learning.shop.mapper.StockMapper;
 import ro.msg.learning.shop.service.StockService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class StockController {
 
     private final StockService stockService;
+    private final StockMapper stockMapper;
 
     @GetMapping(path = "/stocks/{locationId}", produces = {"text/csv"})
     public List<StockDto> getStockByLocationId(@PathVariable Integer locationId, HttpServletResponse response) {
@@ -25,16 +26,7 @@ public class StockController {
 
         return stockService.getStocksByLocationId(locationId)
                 .parallelStream()
-                .map(this::mapStockToStockDto)
+                .map(stockMapper::mapStockToStockDto)
                 .collect(Collectors.toList());
-    }
-
-    private StockDto mapStockToStockDto(Stock stock) {
-        return new StockDto(
-                stock.getId(),
-                stock.getQuantity(),
-                stock.getLocation().getId(),
-                stock.getProduct().getId()
-        );
     }
 }

@@ -2,8 +2,10 @@ package ro.msg.learning.shop.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.msg.learning.shop.dto.in.OrderDtoIn;
 import ro.msg.learning.shop.exception.CustomerNotFoundException;
+import ro.msg.learning.shop.mapper.OrderMapper;
 import ro.msg.learning.shop.model.Customer;
 import ro.msg.learning.shop.model.Location;
 import ro.msg.learning.shop.model.LocationProductQuantity;
@@ -17,21 +19,24 @@ import ro.msg.learning.shop.repository.OrderRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderService {
 
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final LocationService locationService;
     private final StockService stockService;
+    private final OrderMapper orderMapper;
 
-    public Order createOrder(OrderDtoIn orderDtoIn) {
+    public Order createOrder(OrderDtoIn orderDtoIn, String username) {
 
-        Order order = mapOrderFromOrderDtoIn(orderDtoIn);
+        Order order = orderMapper.mapOrderFromOrderDtoIn(orderDtoIn);
 
         List<LocationProductQuantity> locationsWithProductsAndQuantities =
                 locationService.getLocationsWithProductsByOrder(orderDtoIn);
@@ -40,7 +45,7 @@ public class OrderService {
                 .map(LocationProductQuantity::getLocation)
                 .collect(Collectors.toSet());
 
-        Customer customer = customerRepository.findById(1)
+        Customer customer = Optional.ofNullable(customerRepository.findByUserUsername(username))
                 .orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
 
         order.setCustomer(customer);
@@ -66,16 +71,6 @@ public class OrderService {
 
         order = orderRepository.save(order);
 
-        return order;
-    }
-
-    private Order mapOrderFromOrderDtoIn(OrderDtoIn orderDtoIn) {
-        Order order = new Order();
-        order.setDateTime(orderDtoIn.getDateTime());
-        order.setCity(orderDtoIn.getAddress().getCity());
-        order.setCountry(orderDtoIn.getAddress().getCountry());
-        order.setCounty(orderDtoIn.getAddress().getCounty());
-        order.setStreet(orderDtoIn.getAddress().getStreet());
         return order;
     }
 

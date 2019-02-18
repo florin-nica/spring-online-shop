@@ -11,13 +11,19 @@ public class AppExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(StockNotFoundException.class)
-    public ResponseEntity handleException(StockNotFoundException exception) {
+    public ResponseEntity handleStockNotFoundException(StockNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
     @ResponseBody
     @ExceptionHandler(CustomerNotFoundException.class)
-    public ResponseEntity handleException(CustomerNotFoundException exception) {
+    public ResponseEntity handleCustomerNotFoundException(CustomerNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleOtherException(Exception exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
 }

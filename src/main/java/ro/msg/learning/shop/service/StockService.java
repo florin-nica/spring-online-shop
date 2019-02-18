@@ -2,6 +2,7 @@ package ro.msg.learning.shop.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.msg.learning.shop.model.LocationProductQuantity;
 import ro.msg.learning.shop.model.Stock;
 import ro.msg.learning.shop.model.StockProductQuantity;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class StockService {
 
     private final StockRepository stockRepository;

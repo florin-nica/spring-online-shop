@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,10 +27,9 @@ public class Location {
     private Set<Order> orders;
 
     private String name;
-    private String country;
-    private String city;
-    private String county;
-    private String street;
+
+    @Embedded
+    private Address address;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
     private List<Stock> stocks;
