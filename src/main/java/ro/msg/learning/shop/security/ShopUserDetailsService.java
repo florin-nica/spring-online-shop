@@ -1,4 +1,4 @@
-package ro.msg.learning.shop.sequrity;
+package ro.msg.learning.shop.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package ro.msg.learning.shop;
+package ro.msg.learning.shop.scheduler;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Component
 @RequiredArgsConstructor
-public class ScheduledDailyRevenue {
+public class DailyRevenuesScheduler {
 
     private final RevenueService revenueService;
 

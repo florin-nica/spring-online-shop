@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ro.msg.learning.shop.sequrity.ShopUserDetailsService;
+import ro.msg.learning.shop.security.ShopUserDetailsService;
 
 @EnableWebSecurity
 @SuppressWarnings("squid:S1118")

@@ -1,4 +1,4 @@
-package ro.msg.learning.shop;
+package ro.msg.learning.shop.converter;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
