@@ -72,6 +72,19 @@ public class ShopProcessor extends ODataSingleProcessor {
 
             throw new ODataNotFoundException(ODataNotFoundException.ENTITY);
 
+        } else if (uriInfo.getNavigationSegments().size() == 1) {
+            entitySet = uriInfo.getTargetEntitySet();
+
+            if (ENTITY_SET_NAME_ORDER_DETAILS.equals(entitySet.getName())) {
+                int orderKey = getKeyValue(uriInfo.getKeyPredicates().get(0));
+
+                List<Map<String, Object>> orderDetails = new ArrayList<>(dataStore.getOrderDetailsForOrder(orderKey));
+
+                return EntityProvider.writeFeed(contentType, entitySet, orderDetails, EntityProviderWriteProperties
+                        .serviceRoot(getContext().getPathInfo().getServiceRoot()).build());
+            }
+
+            throw new ODataNotFoundException(ODataNotFoundException.ENTITY);
         }
 
         throw new ODataNotImplementedException();
@@ -105,19 +118,6 @@ public class ShopProcessor extends ODataSingleProcessor {
 
             throw new ODataNotFoundException(ODataNotFoundException.ENTITY);
 
-        } else if (uriInfo.getNavigationSegments().size() == 1) {
-            entitySet = uriInfo.getTargetEntitySet();
-
-            if (ENTITY_SET_NAME_ORDER_DETAILS.equals(entitySet.getName())) {
-                int orderKey = getKeyValue(uriInfo.getKeyPredicates().get(0));
-
-                List<Map<String, Object>> orderDetails = new ArrayList<>(dataStore.getOrderDetailsForOrder(orderKey));
-
-                return EntityProvider.writeFeed(contentType, entitySet, orderDetails, EntityProviderWriteProperties
-                        .serviceRoot(getContext().getPathInfo().getServiceRoot()).build());
-            }
-
-            throw new ODataNotFoundException(ODataNotFoundException.ENTITY);
         }
 
         throw new ODataNotImplementedException();

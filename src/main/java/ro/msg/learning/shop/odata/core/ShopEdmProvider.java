@@ -191,12 +191,12 @@ public class ShopEdmProvider extends EdmProvider {
         if (NAMESPACE.equals(edmFQName.getNamespace())) {
             if (ASSOCIATION_ORDERDETAIL_ORDER.getName().equals(edmFQName.getName())) {
                 return new Association().setName(ASSOCIATION_ORDERDETAIL_ORDER.getName())
-                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_1_2).setRole(ROLE_1_1).setMultiplicity(EdmMultiplicity.MANY))
-                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_1_3).setRole(ROLE_1_2).setMultiplicity(EdmMultiplicity.ONE));
+                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_1_2).setRole(ROLE_1_1).setMultiplicity(EdmMultiplicity.ONE))
+                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_1_3).setRole(ROLE_1_2).setMultiplicity(EdmMultiplicity.MANY));
             } else if (ASSOCIATION_ORDERDETAIL_PRODUCT.getName().equals(edmFQName.getName())) {
                 return new Association().setName(ASSOCIATION_ORDERDETAIL_PRODUCT.getName())
-                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_1_1).setRole(ROLE_2_1).setMultiplicity(EdmMultiplicity.MANY))
-                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_1_3).setRole(ROLE_2_2).setMultiplicity(EdmMultiplicity.ONE));
+                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_1_1).setRole(ROLE_2_1).setMultiplicity(EdmMultiplicity.ONE))
+                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_1_3).setRole(ROLE_2_2).setMultiplicity(EdmMultiplicity.MANY));
             }
         }
         return null;
