@@ -37,25 +37,25 @@ public class ShopEdmProvider extends EdmProvider {
 
     private static final String NAMESPACE = "ro.msg.learning.shop.OData";
 
-    private static final FullQualifiedName ENTITY_TYPE_1_1 = new FullQualifiedName(NAMESPACE, ENTITY_NAME_PRODUCT);
-    private static final FullQualifiedName ENTITY_TYPE_1_2 = new FullQualifiedName(NAMESPACE, ENTITY_NAME_ORDER);
-    private static final FullQualifiedName ENTITY_TYPE_1_3 = new FullQualifiedName(NAMESPACE, ENTITY_NAME_ORDER_DETAIL);
+    private static final FullQualifiedName ENTITY_TYPE_PRODUCT = new FullQualifiedName(NAMESPACE, ENTITY_NAME_PRODUCT);
+    private static final FullQualifiedName ENTITY_TYPE_ORDER = new FullQualifiedName(NAMESPACE, ENTITY_NAME_ORDER);
+    private static final FullQualifiedName ENTITY_TYPE_ORDER_DETAIL = new FullQualifiedName(NAMESPACE, ENTITY_NAME_ORDER_DETAIL);
 
     private static final FullQualifiedName COMPLEX_TYPE_ADDRESS = new FullQualifiedName(NAMESPACE, COMPLEX_TYPE_NAME_ADDRESS);
 
-    private static final FullQualifiedName ASSOCIATION_ORDERDETAIL_ORDER = new FullQualifiedName(NAMESPACE, "OrderDetail_Order_Order_OrderDetail");
-    private static final FullQualifiedName ASSOCIATION_ORDERDETAIL_PRODUCT = new FullQualifiedName(NAMESPACE, "OrderDetail_Product_Product_OrderDetail");
+    private static final FullQualifiedName ASSOCIATION_ORDER_DETAIL_ORDER = new FullQualifiedName(NAMESPACE, "OrderDetail_Order_Order_OrderDetail");
+    private static final FullQualifiedName ASSOCIATION_ORDER_DETAIL_PRODUCT = new FullQualifiedName(NAMESPACE, "OrderDetail_Product_Product_OrderDetail");
 
-    private static final String ROLE_1_1 = "Order_OrderDetail";
-    private static final String ROLE_1_2 = "OrderDetail_Order";
+    private static final String ROLE_ORDER_ORDER_DETAIL = "Order_OrderDetail";
+    private static final String ROLE_ORDER_DETAIL_ORDER = "OrderDetail_Order";
 
-    private static final String ROLE_2_1 = "Product_OrderDetail";
-    private static final String ROLE_2_2 = "OrderDetail_Product";
+    private static final String ROLE_PRODUCT_ORDER_DETAIL = "Product_OrderDetail";
+    private static final String ROLE_ORDER_DETAIL_PRODUCT = "OrderDetail_Product";
 
     private static final String ENTITY_CONTAINER = "ODataShopEntityContainer";
 
-    private static final String ASSOCIATION_SET_ORDERS_ORDERDETAILS = "Orders_OrderDetails";
-    private static final String ASSOCIATION_SET_PRODUCTS_ORDERDETAILS = "Products_OrderDetails";
+    private static final String ASSOCIATION_SET_ORDERS_ORDER_DETAILS = "Orders_OrderDetails";
+    private static final String ASSOCIATION_SET_PRODUCTS_ORDER_DETAILS = "Products_OrderDetails";
 
     static final String ENTITY_SET_NAME_ORDERS = "Orders";
     static final String ENTITY_SET_NAME_PRODUCTS = "Products";
@@ -69,9 +69,9 @@ public class ShopEdmProvider extends EdmProvider {
         schema.setNamespace(NAMESPACE);
 
         List<EntityType> entityTypes = new ArrayList<>();
-        entityTypes.add(getEntityType(ENTITY_TYPE_1_1));
-        entityTypes.add(getEntityType(ENTITY_TYPE_1_2));
-        entityTypes.add(getEntityType(ENTITY_TYPE_1_3));
+        entityTypes.add(getEntityType(ENTITY_TYPE_PRODUCT));
+        entityTypes.add(getEntityType(ENTITY_TYPE_ORDER));
+        entityTypes.add(getEntityType(ENTITY_TYPE_ORDER_DETAIL));
         schema.setEntityTypes(entityTypes);
 
         List<ComplexType> complexTypes = new ArrayList<>();
@@ -79,8 +79,8 @@ public class ShopEdmProvider extends EdmProvider {
         schema.setComplexTypes(complexTypes);
 
         List<Association> associations = new ArrayList<>();
-        associations.add(getAssociation(ASSOCIATION_ORDERDETAIL_ORDER));
-        associations.add(getAssociation(ASSOCIATION_ORDERDETAIL_PRODUCT));
+        associations.add(getAssociation(ASSOCIATION_ORDER_DETAIL_ORDER));
+        associations.add(getAssociation(ASSOCIATION_ORDER_DETAIL_PRODUCT));
         schema.setAssociations(associations);
 
         List<EntityContainer> entityContainers = new ArrayList<>();
@@ -94,8 +94,8 @@ public class ShopEdmProvider extends EdmProvider {
         entityContainer.setEntitySets(entitySets);
 
         List<AssociationSet> associationSets = new ArrayList<>();
-        associationSets.add(getAssociationSet(ENTITY_CONTAINER, ASSOCIATION_ORDERDETAIL_ORDER, ENTITY_SET_NAME_ORDER_DETAILS, ROLE_1_2));
-        associationSets.add(getAssociationSet(ENTITY_CONTAINER, ASSOCIATION_ORDERDETAIL_PRODUCT, ENTITY_SET_NAME_PRODUCTS, ROLE_2_2));
+        associationSets.add(getAssociationSet(ENTITY_CONTAINER, ASSOCIATION_ORDER_DETAIL_ORDER, ENTITY_SET_NAME_ORDER_DETAILS, ROLE_ORDER_DETAIL_ORDER));
+        associationSets.add(getAssociationSet(ENTITY_CONTAINER, ASSOCIATION_ORDER_DETAIL_PRODUCT, ENTITY_SET_NAME_PRODUCTS, ROLE_ORDER_DETAIL_PRODUCT));
         entityContainer.setAssociationSets(associationSets);
 
         entityContainers.add(entityContainer);
@@ -110,7 +110,7 @@ public class ShopEdmProvider extends EdmProvider {
     public EntityType getEntityType(FullQualifiedName edmFQName) {
         if (NAMESPACE.equals(edmFQName.getNamespace())) {
 
-            if (ENTITY_TYPE_1_1.getName().equals(edmFQName.getName())) {
+            if (ENTITY_TYPE_PRODUCT.getName().equals(edmFQName.getName())) {
 
                 //Properties
                 List<Property> properties = new ArrayList<>();
@@ -122,14 +122,14 @@ public class ShopEdmProvider extends EdmProvider {
 
                 //Navigation Properties
                 List<NavigationProperty> navigationProperties =
-                        getNavigationProperties(ENTITY_SET_NAME_ORDER_DETAILS, ASSOCIATION_ORDERDETAIL_PRODUCT, ROLE_2_1, ROLE_2_2);
+                        getNavigationProperties(ENTITY_SET_NAME_ORDER_DETAILS, ASSOCIATION_ORDER_DETAIL_PRODUCT, ROLE_PRODUCT_ORDER_DETAIL, ROLE_ORDER_DETAIL_PRODUCT);
 
-                return new EntityType().setName(ENTITY_TYPE_1_1.getName())
+                return new EntityType().setName(ENTITY_TYPE_PRODUCT.getName())
                         .setProperties(properties)
                         .setKey(setIdAsKey())
                         .setNavigationProperties(navigationProperties);
 
-            } else if (ENTITY_TYPE_1_2.getName().equals(edmFQName.getName())) {
+            } else if (ENTITY_TYPE_ORDER.getName().equals(edmFQName.getName())) {
 
                 //Properties
                 List<Property> properties = new ArrayList<>();
@@ -139,14 +139,14 @@ public class ShopEdmProvider extends EdmProvider {
 
                 //Navigation Properties
                 List<NavigationProperty> navigationProperties =
-                        getNavigationProperties(ENTITY_SET_NAME_ORDER_DETAILS, ASSOCIATION_ORDERDETAIL_ORDER, ROLE_1_1, ROLE_1_2);
+                        getNavigationProperties(ENTITY_SET_NAME_ORDER_DETAILS, ASSOCIATION_ORDER_DETAIL_ORDER, ROLE_ORDER_ORDER_DETAIL, ROLE_ORDER_DETAIL_ORDER);
 
-                return new EntityType().setName(ENTITY_TYPE_1_2.getName())
+                return new EntityType().setName(ENTITY_TYPE_ORDER.getName())
                         .setProperties(properties)
                         .setKey(setIdAsKey())
                         .setNavigationProperties(navigationProperties);
 
-            } else if (ENTITY_TYPE_1_3.getName().equals(edmFQName.getName())) {
+            } else if (ENTITY_TYPE_ORDER_DETAIL.getName().equals(edmFQName.getName())) {
 
                 //Properties
                 List<Property> properties = new ArrayList<>();
@@ -157,11 +157,11 @@ public class ShopEdmProvider extends EdmProvider {
 
                 //Navigation Properties
                 List<NavigationProperty> navigationProperties =
-                        getNavigationProperties(ENTITY_NAME_ORDER, ASSOCIATION_ORDERDETAIL_ORDER, ROLE_1_2, ROLE_1_1);
+                        getNavigationProperties(ENTITY_NAME_ORDER, ASSOCIATION_ORDER_DETAIL_ORDER, ROLE_ORDER_DETAIL_ORDER, ROLE_ORDER_ORDER_DETAIL);
                 navigationProperties.add(new NavigationProperty().setName(ENTITY_NAME_PRODUCT)
-                        .setRelationship(ASSOCIATION_ORDERDETAIL_PRODUCT).setFromRole(ROLE_2_2).setToRole(ROLE_2_1));
+                        .setRelationship(ASSOCIATION_ORDER_DETAIL_PRODUCT).setFromRole(ROLE_ORDER_DETAIL_PRODUCT).setToRole(ROLE_PRODUCT_ORDER_DETAIL));
 
-                return new EntityType().setName(ENTITY_TYPE_1_3.getName())
+                return new EntityType().setName(ENTITY_TYPE_ORDER_DETAIL.getName())
                         .setProperties(properties)
                         .setKey(setIdAsKey())
                         .setNavigationProperties(navigationProperties);
@@ -189,14 +189,14 @@ public class ShopEdmProvider extends EdmProvider {
     @Override
     public Association getAssociation(FullQualifiedName edmFQName) {
         if (NAMESPACE.equals(edmFQName.getNamespace())) {
-            if (ASSOCIATION_ORDERDETAIL_ORDER.getName().equals(edmFQName.getName())) {
-                return new Association().setName(ASSOCIATION_ORDERDETAIL_ORDER.getName())
-                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_1_2).setRole(ROLE_1_1).setMultiplicity(EdmMultiplicity.ONE))
-                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_1_3).setRole(ROLE_1_2).setMultiplicity(EdmMultiplicity.MANY));
-            } else if (ASSOCIATION_ORDERDETAIL_PRODUCT.getName().equals(edmFQName.getName())) {
-                return new Association().setName(ASSOCIATION_ORDERDETAIL_PRODUCT.getName())
-                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_1_1).setRole(ROLE_2_1).setMultiplicity(EdmMultiplicity.ONE))
-                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_1_3).setRole(ROLE_2_2).setMultiplicity(EdmMultiplicity.MANY));
+            if (ASSOCIATION_ORDER_DETAIL_ORDER.getName().equals(edmFQName.getName())) {
+                return new Association().setName(ASSOCIATION_ORDER_DETAIL_ORDER.getName())
+                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_ORDER).setRole(ROLE_ORDER_ORDER_DETAIL).setMultiplicity(EdmMultiplicity.ONE))
+                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_ORDER_DETAIL).setRole(ROLE_ORDER_DETAIL_ORDER).setMultiplicity(EdmMultiplicity.MANY));
+            } else if (ASSOCIATION_ORDER_DETAIL_PRODUCT.getName().equals(edmFQName.getName())) {
+                return new Association().setName(ASSOCIATION_ORDER_DETAIL_PRODUCT.getName())
+                        .setEnd1(new AssociationEnd().setType(ENTITY_TYPE_PRODUCT).setRole(ROLE_PRODUCT_ORDER_DETAIL).setMultiplicity(EdmMultiplicity.ONE))
+                        .setEnd2(new AssociationEnd().setType(ENTITY_TYPE_ORDER_DETAIL).setRole(ROLE_ORDER_DETAIL_PRODUCT).setMultiplicity(EdmMultiplicity.MANY));
             }
         }
         return null;
@@ -206,11 +206,11 @@ public class ShopEdmProvider extends EdmProvider {
     public EntitySet getEntitySet(String entityContainer, String name) {
         if (ENTITY_CONTAINER.equals(entityContainer)) {
             if (ENTITY_SET_NAME_PRODUCTS.equals(name)) {
-                return new EntitySet().setName(name).setEntityType(ENTITY_TYPE_1_1);
+                return new EntitySet().setName(name).setEntityType(ENTITY_TYPE_PRODUCT);
             } else if (ENTITY_SET_NAME_ORDERS.equals(name)) {
-                return new EntitySet().setName(name).setEntityType(ENTITY_TYPE_1_2);
+                return new EntitySet().setName(name).setEntityType(ENTITY_TYPE_ORDER);
             } else if (ENTITY_SET_NAME_ORDER_DETAILS.equals(name)) {
-                return new EntitySet().setName(name).setEntityType(ENTITY_TYPE_1_3);
+                return new EntitySet().setName(name).setEntityType(ENTITY_TYPE_ORDER_DETAIL);
             }
         }
         return null;
@@ -220,16 +220,16 @@ public class ShopEdmProvider extends EdmProvider {
     public AssociationSet getAssociationSet(String entityContainer, FullQualifiedName association,
                                             String sourceEntitySetName, String sourceEntitySetRole) {
         if (ENTITY_CONTAINER.equals(entityContainer)) {
-            if (ASSOCIATION_ORDERDETAIL_ORDER.equals(association)) {
-                return new AssociationSet().setName(ASSOCIATION_SET_ORDERS_ORDERDETAILS)
-                        .setAssociation(ASSOCIATION_ORDERDETAIL_ORDER)
-                        .setEnd1(new AssociationSetEnd().setRole(ROLE_1_2).setEntitySet(ENTITY_SET_NAME_ORDER_DETAILS))
-                        .setEnd2(new AssociationSetEnd().setRole(ROLE_1_1).setEntitySet(ENTITY_SET_NAME_ORDERS));
-            } else if (ASSOCIATION_ORDERDETAIL_PRODUCT.equals(association)) {
-                return new AssociationSet().setName(ASSOCIATION_SET_PRODUCTS_ORDERDETAILS)
-                        .setAssociation(ASSOCIATION_ORDERDETAIL_PRODUCT)
-                        .setEnd1(new AssociationSetEnd().setRole(ROLE_2_2).setEntitySet(ENTITY_SET_NAME_ORDER_DETAILS))
-                        .setEnd2(new AssociationSetEnd().setRole(ROLE_2_1).setEntitySet(ENTITY_SET_NAME_PRODUCTS));
+            if (ASSOCIATION_ORDER_DETAIL_ORDER.equals(association)) {
+                return new AssociationSet().setName(ASSOCIATION_SET_ORDERS_ORDER_DETAILS)
+                        .setAssociation(ASSOCIATION_ORDER_DETAIL_ORDER)
+                        .setEnd1(new AssociationSetEnd().setRole(ROLE_ORDER_DETAIL_ORDER).setEntitySet(ENTITY_SET_NAME_ORDER_DETAILS))
+                        .setEnd2(new AssociationSetEnd().setRole(ROLE_ORDER_ORDER_DETAIL).setEntitySet(ENTITY_SET_NAME_ORDERS));
+            } else if (ASSOCIATION_ORDER_DETAIL_PRODUCT.equals(association)) {
+                return new AssociationSet().setName(ASSOCIATION_SET_PRODUCTS_ORDER_DETAILS)
+                        .setAssociation(ASSOCIATION_ORDER_DETAIL_PRODUCT)
+                        .setEnd1(new AssociationSetEnd().setRole(ROLE_ORDER_DETAIL_PRODUCT).setEntitySet(ENTITY_SET_NAME_ORDER_DETAILS))
+                        .setEnd2(new AssociationSetEnd().setRole(ROLE_PRODUCT_ORDER_DETAIL).setEntitySet(ENTITY_SET_NAME_PRODUCTS));
             }
         }
         return null;
