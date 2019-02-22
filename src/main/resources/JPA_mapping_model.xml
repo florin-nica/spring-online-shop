@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JPAEDMMappingModel xmlns="http://www.apache.org/olingo/odata2/jpa/processor/api/model/mapping">
+    <PersistenceUnit name="shop">
+        <EDMSchemaNamespace>Shop</EDMSchemaNamespace>
+        <JPAEntityTypes>
+            <JPAEntityType name="Order">
+                <EDMEntityType>Order</EDMEntityType>
+                <EDMEntitySet>Orders</EDMEntitySet>
+                <JPAAttributes>
+                    <JPAAttribute name="dateTime"
+                                  exclude="true"/>
+                </JPAAttributes>
+                <JPARelationships/>
+            </JPAEntityType>
+            <JPAEntityType name="Revenue">
+                <JPAAttributes>
+                    <JPAAttribute name="date"
+                                  exclude="true"/>
+                </JPAAttributes>
+                <JPARelationships/>
+            </JPAEntityType>
+            <JPAEntityType name="User">
+                <JPAAttributes>
+                    <JPAAttribute name="password"
+                                  exclude="true"/>
+                </JPAAttributes>
+                <JPARelationships/>
+            </JPAEntityType>
+        </JPAEntityTypes>
+        <JPAEmbeddableTypes>
+            <JPAEmbeddableType name="Address">
+                <EDMComplexType>Address</EDMComplexType>
+                <JPAAttributes>
+                    <JPAAttribute name="country">Country</JPAAttribute>
+                    <JPAAttribute name="county">County</JPAAttribute>
+                    <JPAAttribute name="city">City</JPAAttribute>
+                    <JPAAttribute name="street">Street</JPAAttribute>
+                </JPAAttributes>
+            </JPAEmbeddableType>
+        </JPAEmbeddableTypes>
+    </PersistenceUnit>
+</JPAEDMMappingModel>

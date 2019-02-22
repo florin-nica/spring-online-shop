@@ -8,11 +8,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-import ro.msg.learning.shop.dto.AddressDto;
 import ro.msg.learning.shop.dto.DistanceMatrixDto;
 import ro.msg.learning.shop.dto.ElementDto;
 import ro.msg.learning.shop.dto.in.OrderDtoIn;
 import ro.msg.learning.shop.exception.StockNotFoundException;
+import ro.msg.learning.shop.model.Address;
 import ro.msg.learning.shop.model.Location;
 import ro.msg.learning.shop.model.LocationDistance;
 import ro.msg.learning.shop.model.LocationProductQuantity;
@@ -38,7 +38,7 @@ public class ClosestLocationStrategy extends BaseLocationStrategy implements Loc
         setLocationsWithAllProductsAndOrderedProducts(orderDtoIn);
 
         if (locationsWithAllProducts != null && !locationsWithAllProducts.isEmpty()) {
-            AddressDto address = orderDtoIn.getAddress();
+            Address address = orderDtoIn.getAddress();
 
             Location closestLocation =
                     getLocationByShortestDistance(locationsWithAllProducts,

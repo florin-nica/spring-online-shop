@@ -1,7 +1,7 @@
 package ro.msg.learning.shop.dto.in;
 
 import lombok.Data;
-import ro.msg.learning.shop.dto.AddressDto;
+import ro.msg.learning.shop.model.Address;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +10,6 @@ import java.util.List;
 public class OrderDtoIn {
 
     private LocalDateTime dateTime;
-    private AddressDto address;
+    private Address address;
     private List<OrderDetailDtoIn> orderDetails;
 }
