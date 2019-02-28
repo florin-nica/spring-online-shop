@@ -83,16 +83,6 @@
         </dependency>
         <dependency>
             <groupId>org.apache.olingo</groupId>
-            <artifactId>olingo-odata2-core</artifactId>
-            <version>${olingo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.olingo</groupId>
-            <artifactId>olingo-odata2-jpa-processor-core</artifactId>
-            <version>${olingo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.olingo</groupId>
             <artifactId>olingo-odata2-api</artifactId>
             <version>${olingo.version}</version>
         </dependency>
@@ -105,6 +95,15 @@
             <groupId>org.apache.olingo</groupId>
             <artifactId>olingo-odata2-jpa-processor-core</artifactId>
             <version>${olingo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.5</version>
         </dependency>
     </dependencies>
 
