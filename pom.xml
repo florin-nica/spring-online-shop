@@ -92,19 +92,9 @@
             <version>${olingo.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.olingo</groupId>
-            <artifactId>olingo-odata2-api</artifactId>
-            <version>${olingo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.olingo</groupId>
-            <artifactId>olingo-odata2-core</artifactId>
-            <version>${olingo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.olingo</groupId>
-            <artifactId>olingo-odata2-jpa-processor-core</artifactId>
-            <version>${olingo.version}</version>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.0.10.RELEASE</version>
         </dependency>
     </dependencies>
 
