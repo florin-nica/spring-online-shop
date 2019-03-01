@@ -28,7 +28,8 @@ import java.time.LocalDate;
                 "JOIN orders o ON od.order_id = o.id    \n" +
                 "JOIN order_location ol ON o.id = ol.order_id    \n" +
                 "JOIN Product p ON od.product_id = p.id     \n" +
-                "WHERE o.date_time BETWEEN :startTime AND :endTime    \n" +
+                "WHERE o.date_time  >= :startTime " +
+                "AND CAST(o.date_time as date) < :nextDay    \n" +
                 "GROUP BY ol.location_id, date",
         resultSetMapping = "RevenueResult")
 public class Revenue {

@@ -19,9 +19,10 @@ public class RevenueService {
 
     public void saveDailyRevenues(LocalDate date) {
         LocalDateTime startTime = date.atStartOfDay();
-        LocalDateTime endTime = date.atTime(23, 59, 59);
+        LocalDate nextDay = date.plusDays(1);
 
-        List<Revenue> dailyRevenues = revenueRepository.getSummedRevenuesByLocationAndDate(startTime, endTime);
+        List<Revenue> dailyRevenues =
+                revenueRepository.getSummedRevenuesByLocationAndDate(startTime, nextDay);
 
         revenueRepository.saveAll(dailyRevenues);
     }

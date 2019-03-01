@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ro.msg.learning.shop.model.Revenue;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,5 +14,5 @@ public interface RevenueRepository extends JpaRepository<Revenue, Integer> {
 
     List<Revenue> getSummedRevenuesByLocationAndDate(
             @Param("startTime") LocalDateTime startTime,
-            @Param("endTime") LocalDateTime endTime);
+            @Param("nextDay") LocalDate nextDay);
 }
