@@ -13,7 +13,7 @@ public class DailyRevenuesScheduler {
 
     private final RevenueService revenueService;
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 1 0 * * *")
     public void computeDailyRevenueForAllLocations() {
         revenueService.saveDailyRevenues(LocalDate.now().minusDays(1));
     }

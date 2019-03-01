@@ -6,6 +6,7 @@ import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import ro.msg.learning.shop.dto.DistanceMatrixDto;
@@ -26,7 +27,8 @@ import java.util.stream.Collectors;
 
 public class ClosestLocationStrategy extends BaseLocationStrategy implements LocationStrategy {
 
-    private static final String API_KEY = "AIzaSyBPtBPSLKNAwOfu3zq48XaIVyLlscgdz5M";
+    @Value("${google.distance.matrix.api.key}")
+    private String apiKey;
 
     public ClosestLocationStrategy(LocationRepository locationRepository, ProductRepository productRepository) {
         super(locationRepository, productRepository);
@@ -61,7 +63,7 @@ public class ClosestLocationStrategy extends BaseLocationStrategy implements Loc
                         .collect(Collectors.joining("|"));
 
         final String uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" +
-                originsString + "&destinations=" + destination + "&key=" + API_KEY + "\n";
+                originsString + "&destinations=" + destination + "&key=" + apiKey + "\n";
 
         RestTemplate restTemplate = getRestTemplateBypassingHostNameVerification();
         DistanceMatrixDto result = restTemplate.getForObject(uri, DistanceMatrixDto.class);
