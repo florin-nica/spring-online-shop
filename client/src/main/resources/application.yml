@@ -8,6 +8,7 @@ security:
       client-secret: secret
       access-token-uri: http://localhost:8081/oauth/token
       user-authorization-uri: http://localhost:8081/oauth/authorize
+      clientAuthenticationScheme: form
 
     resource:
       user-info-uri: http://localhost:8081/user

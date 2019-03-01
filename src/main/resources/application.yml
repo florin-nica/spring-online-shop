@@ -16,6 +16,11 @@ spring:
   flyway:
     locations: classpath:/db/migration,classpath:/db/testdata
 
+security:
+  oauth2:
+    resource:
+      id: oauth2_id
+
 client:
   access-token-uri: http://localhost:8080/oauth/token
   id: shop-client
