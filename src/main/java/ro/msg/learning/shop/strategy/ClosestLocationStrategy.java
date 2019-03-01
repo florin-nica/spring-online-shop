@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class ClosestLocationStrategy extends BaseLocationStrategy implements LocationStrategy {
 
-    @Value("${google.distance.matrix.api.key}")
+    @Value("${google.key}")
     private String apiKey;
 
     public ClosestLocationStrategy(LocationRepository locationRepository, ProductRepository productRepository) {
