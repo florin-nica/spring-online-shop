@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   datasource:
     url: jdbc:h2:file:~/shopdb;DB_CLOSE_ON_EXIT=FALSE
@@ -14,6 +17,7 @@ spring:
     locations: classpath:/db/migration,classpath:/db/testdata
 
 client:
+  access-token-uri: http://localhost:8080/oauth/token
   id: shop-client
   grant.types: password,authorization_code,refresh_token,implicit
   authorities: CUSTOMER
